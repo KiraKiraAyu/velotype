@@ -10,8 +10,10 @@ impl Editor {
     ) -> ScrollbarGeometry {
         let track_height = viewport_height.max(20.0);
         let content_height = viewport_height + max_scroll_y;
+        let min_thumb_height = 28.0_f32.min(track_height);
         let thumb_height = if max_scroll_y > 0.5 {
-            (track_height * (viewport_height / content_height)).clamp(28.0, track_height)
+            (track_height * (viewport_height / content_height))
+                .clamp(min_thumb_height, track_height)
         } else {
             track_height
         };
